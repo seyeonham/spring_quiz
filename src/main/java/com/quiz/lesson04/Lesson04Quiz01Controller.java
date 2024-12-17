@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.lesson04.BO.SellerBO;
@@ -20,7 +21,7 @@ public class Lesson04Quiz01Controller {
 	
 	// seller 추가 화면
 	// http://localhost:8080/lesson04/quiz01/add-seller-view
-	@RequestMapping("/add-seller-view")
+	@RequestMapping(path = "/add-seller-view", method = RequestMethod.GET)
 	public String addSellerView() {
 		return "lesson04/addSeller";
 	}
