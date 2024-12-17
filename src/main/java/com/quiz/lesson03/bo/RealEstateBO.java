@@ -30,7 +30,22 @@ public class RealEstateBO {
 	
 	// input: area, price
 	// output: List<RealEstate>
-	public List<RealEstate> getRealEstateByAreaAndPrice(HashMap<String, Integer> param) {
+	public List<RealEstate> getRealEstateByAreaAndPrice(int area, int price) {
 		return realEstateMapper.selectRealEstateByAreaAndPrice(area, price);
+	}
+	
+	public int addRealEstate(RealEstate realEstate) {
+		return realEstateMapper.insertRealEstate(realEstate);
+	}
+	
+	public int addRealEstateField(int realtorId, String address, int area, 
+			String type, int price, Integer rentPrice) {
+		return realEstateMapper.insertRealEstateField(realtorId, address, area, type, price, rentPrice);
+	}
+	
+	// input: id, type, price
+	// output: int
+	public int updateRealEstateById(int id, String type, int price) {
+		return realEstateMapper.updateRealEstateById(id, type, price);
 	}
 }

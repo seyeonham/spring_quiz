@@ -57,4 +57,63 @@
 	        	AND `price` <= #{price}
 	        	]]>
 	</select>
+	<!-- quiz 2-1 -->
+	<insert id="insertRealEstete" parameterType="com.quiz.lesson03.domain.RealEstate">
+		INSERT INTO `real_estate`
+		(
+			`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	<!-- quiz 2-2 -->
+	<insert id="insertRealEstateField" parameterType="map">
+		INSERT INTO `real_estate`
+		(
+			`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	<update id="updateRealEstateById" parameterType="map">
+		UPDATE `real_estate`
+		SET
+			`type` = #{type}
+			, `price` = #{price}
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{id}
+	</update>
 </mapper>
