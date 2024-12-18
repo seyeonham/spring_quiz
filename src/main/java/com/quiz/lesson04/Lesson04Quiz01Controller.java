@@ -21,7 +21,7 @@ public class Lesson04Quiz01Controller {
 	
 	// seller 추가 화면
 	// http://localhost:8080/lesson04/quiz01/add-seller-view
-	@RequestMapping(path = "/add-seller-view", method = RequestMethod.GET)
+	@GetMapping("/add-seller-view")
 	public String addSellerView() {
 		return "lesson04/addSeller";
 	}
@@ -42,10 +42,20 @@ public class Lesson04Quiz01Controller {
 	
 	// 최근 추가된 seller 화면
 	// http://localhost:8080/lesson04/quiz01/seller-info-view
+	// http://localhost:8080/lesson04/quiz01/seller-info-view?id=1
 	@GetMapping("/seller-info-view")
-	public String sellerInfoView(Model model) {
+	public String sellerInfoView(
+			@RequestParam(value = "id", required = false) Integer id,
+			Model model) {
+		
 		// DB select
-		Seller seller = sellerBO.getLatestSeller();
+//		Seller seller = null;
+//		if (id != null) {
+//			seller = sellerBO.getSellerById(id);
+//		} else {
+//			seller = sellerBO.getLatestSeller();
+//		}
+		Seller seller = sellerBO.getSeller(id);
 		
 		// model에 데이터 담기
 		model.addAttribute("result", seller);
