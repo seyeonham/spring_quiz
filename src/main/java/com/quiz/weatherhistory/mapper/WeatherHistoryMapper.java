@@ -13,7 +13,7 @@ public interface WeatherHistoryMapper {
 
 	public List<WeatherHistory> selectWeatherHistoryList();
 	
-	public void insertWeatherHistory(
+	public int insertWeatherHistory(
 			@Param("date") Date date, 
 			@Param("weather") String weather, 
 			@Param("microDust") String microDust,

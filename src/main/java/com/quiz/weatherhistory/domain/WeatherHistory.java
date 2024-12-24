@@ -71,5 +71,4 @@ public class WeatherHistory {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
 }
