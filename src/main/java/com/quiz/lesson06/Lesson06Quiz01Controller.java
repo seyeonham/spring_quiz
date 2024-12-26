@@ -29,8 +29,25 @@ public class Lesson06Quiz01Controller {
 		return "lesson06/addBookmark";
 	}
 	
-	// AJAX의 요청 (즐겨찾기 추가 진행)
+	
+	// AJAX의 요청 (url 중복 확인)
 	@ResponseBody
+	@GetMapping("/is-duplicate-url")
+	public Map<String, Object> isDuplicateUrl(
+			@RequestParam("url") String url) {
+		
+		//DB select
+		boolean isDuplicate = bookmarkBO.isDuplicateByUrl(url);
+		
+		// 응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("is_duplicate_url", isDuplicate);
+		return result;
+	}
+	
+	
+	// AJAX의 요청 (즐겨찾기 추가 진행)
 	@PostMapping("/add-bookmark")
 	public Map<String, Object> addBookmark(
 			@RequestParam("name") String name,
@@ -60,5 +77,18 @@ public class Lesson06Quiz01Controller {
 		
 		// 응답
 		return "lesson06/bookmarkList";
+	}
+	
+	@GetMapping("/delete-url")
+	public Map<String, Object> deleteUrl(
+			@RequestParam("id") int id) {
+		
+		// DB delete
+		int countDeleteUrl = bookmarkBO.DeleteUrlById(id);
+		
+		// 응답값
+		Map<String, Object> result = new HashMap<>();
+		
+		return result;
 	}
 }

@@ -17,16 +17,47 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="history, status : ${bookmarkList}">
 					<td th:text="${status.count}"></td>
 					<td th:text="${history.name}"></td>
-					<td th:text="${history.url}"></td>
+					<td>
+						<a th:href="${history.url}" th:text="${history.url}"></a>
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger deleteBtn" th:id="${history.id}">삭제</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+	$(document).ready(function() {
+		$(".deleteBtn").on("click", function() {
+			
+			let id = $(this).attr("id");
+			
+			$.ajax({
+				// request
+				url:"lesson06/quiz01/delete-url"
+				, data:{"id":id}
+			
+				// response
+				, success:function(data) {
+					if (data.count_delete_url) {
+						
+					}
+				}
+				, error:function(error) {
+					alert("url 삭제에 실패했습니다.")
+				}
+			});
+		});
+	});
+	</script>
 </body>
 </html>

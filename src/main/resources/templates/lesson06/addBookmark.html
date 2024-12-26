@@ -17,13 +17,41 @@
 		</div>
 		<div class="form-group">
 			<label for="url">주소</label>
-			<input type="text" id="url" class="form-control">
+			<div class="d-flex justify-content-between">
+				<input type="text" id="url" class="form-control col-11">
+				<button id="urlCheckBtn" class="btn btn-info">중복확인</button>
+			</div>
+			<small id="urlStateArea"></small>
 		</div>
 		<input type="button" id="joinBtn" value="추가" class="btn btn-success form-control">
 	</div>
 	
 	<script>
 		$(document).ready(function() {
+			$("#urlCheckBtn").on("click", function() {
+				$("#urlStateArea").empty();
+				
+				let url = $("#url").val().trim();
+				
+				$.ajax({
+					// request
+					url:"/lesson06/quiz01/is-duplicate-url"
+					, data:{"url":url}
+					
+					// response
+					, success:function(data) {
+						if (data.is_duplicate_url) {
+							$("#urlStateArea").append('<span class="text-danger">중복된 url입니다.</span>')
+						} else {
+							$("#urlStateArea").append('<span class="text-danger">저장 가능한 url입니다.</span>')
+						}
+					}
+					, error:function(error) {
+						alert("url 중복확인에 실패했습니다.");
+					}
+				});
+			});
+			
 			$("#joinBtn").on("click", function() {
 				// validation
 				let name = $("#name").val().trim();
@@ -42,6 +70,10 @@
 				if (!url.startsWith("http://") && !url.startsWith("https://")) {
 					alert("http 또는 https 프로토콜을 입력하세요.");
 					return;
+				}
+				
+				if ($("#urlStateArea").children().length < 1) {
+					alert("url 중복확인을 해주세요.");
 				}
 				
 				console.log(name);
@@ -65,7 +97,7 @@
 						alert("즐겨찾기 추가에 실패했습니다.")
 					}
 				});
-			})
+			});
 		});
 	</script>
 </body>
