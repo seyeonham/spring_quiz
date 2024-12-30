@@ -30,16 +30,20 @@
 			`bookmark`
 	</select>
 	
-	<select id="isDuplicateByUrl" parameterType="String" resultType="boolean">
+	<select id="selectBookmarkByUrl" parameterType="String" resultType="com.quiz.lesson06.domain.Bookmark">
 		SELECT
-			COUNT(*)
+			`id`
+			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
 		FROM
 			`bookmark`
 		WHERE
 			`url` = #{url}
 	</select>
 	
-	<delete id="DeleteUrlById" parameterType="int">
+	<delete id="deleteBookmarkById" parameterType="int">
 		DELETE
 		FROM
 			`bookmark`

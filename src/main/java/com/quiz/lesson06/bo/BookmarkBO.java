@@ -22,11 +22,22 @@ public class BookmarkBO {
 		return bookmarkMapper.selectBookmarkList();
 	}
 	
-	public boolean isDuplicateByUrl(String url) {
-		return bookmarkMapper.isDuplicateByUrl(url);
+	// input: url
+	// output: boolean 		중복: true 	사용가능: false
+	public boolean isDuplicateUrl(String url) {
+		List<Bookmark> bookmarkList = bookmarkMapper.selectBookmarkByUrl(url);
+		// [] => false 사용가능
+		// [O] [O, O] => true 중복
+//		if (bookmarkList.isEmpty()) {
+//			return false;
+//		}
+//		return true;
+		
+//		return bookmarkList.isEmpty() ? false : true;
+		return !bookmarkList.isEmpty();
 	}
 	
-	public int DeleteUrlById(int id) {
-		return bookmarkMapper.DeleteUrlById(id);
+	public int deleteBookmarkById(int id) {
+		return bookmarkMapper.deleteBookmarkById(id);
 	}
 }

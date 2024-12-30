@@ -28,7 +28,8 @@
 						<a th:href="${history.url}" th:text="${history.url}"></a>
 					</td>
 					<td>
-						<button type="button" class="btn btn-danger deleteBtn" th:id="${history.id}">삭제</button>
+						<!-- <button type="button" class="del-btn btn btn-danger" th:value="${history.id}">삭제</button> -->
+						<button type="button" class="del-btn btn btn-danger" th:data-bookmark-id="${history.id}">삭제</button>
 					</td>
 				</tr>
 			</tbody>
@@ -37,19 +38,30 @@
 	
 	<script>
 	$(document).ready(function() {
-		$(".deleteBtn").on("click", function() {
+		$(".del-btn").on("click", function(e) {
+			// 1) button value에 담은 값 가져오기
+			// let id = $(this).val();
+			// let id = e.target.value;
+			// let id = $(this).attr("value");
 			
-			let id = $(this).attr("id");
+			// 2) data를 이용해서 값 가져오기 - 여러값 등록 가능함
+			// 태그에서 사용 : th:data-bookmark-id
+			// js에서 사용: 	.data("bookmark-id")
+			let id = $(this).data("bookmark-id");
 			
 			$.ajax({
 				// request
-				url:"lesson06/quiz01/delete-url"
+				type:"delete"
+				, url:"/lesson06/quiz01/delete-bookmark"
 				, data:{"id":id}
 			
 				// response
 				, success:function(data) {
-					if (data.count_delete_url) {
-						
+					if (data.code == 200) { // 성공
+						// 새로고침 - 스크롤 유지됨, 서버 리스트 데이터 다시 가져옴
+						location.reload(true);
+					} else if (data.code == 300) { // 실패
+						alert(data.error_message);
 					}
 				}
 				, error:function(error) {
