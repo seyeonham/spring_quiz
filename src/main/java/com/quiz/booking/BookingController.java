@@ -109,7 +109,7 @@ public class BookingController {
 			@RequestParam("phoneNumber") String phoneNumber) {
 		
 		// db select
-		Booking booking = bookingBO.getBookingByNamePhoneNumber(name, phoneNumber);
+		Booking booking = bookingBO.getLatestBookingByNamePhoneNumber(name, phoneNumber);
 		
 		// JSON 응답값
 		Map<String, Object> result = new HashMap<>();

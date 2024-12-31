@@ -108,17 +108,19 @@
             		// response
             		, success:function(data) {
             			if (data.code == 200) {
+            				// 성공 alert
             				alert("이름:" + data.booking.name +
             					"\n날짜:" + data.booking.date +
             					"\n일수:" + data.booking.day +
             					"\n인원:" + data.booking.headcount +
             					"\n상태:" + data.booking.state);
             			} else {
+            				// 로직상 에러
             				alert(data.error_message);
             			}
             		}
             		, error:function(e) {
-            			
+            			alert("조회에 실패했습니다.");
             		}
             	});
             });

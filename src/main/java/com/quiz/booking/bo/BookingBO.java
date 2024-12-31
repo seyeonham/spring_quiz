@@ -28,7 +28,17 @@ public class BookingBO {
 		return bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
 	}
 	
-	public Booking getBookingByNamePhoneNumber(String name, String phoneNumber) {
-		return bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
+	// input: name, phoneNumber
+	// output: Booking(단건 최신) or null
+	public Booking getLatestBookingByNamePhoneNumber(String name, String phoneNumber) {
+		List<Booking> bookingList =  bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
+		// [] or [Booking] or [Booking, Booking, ...]
+//		if (bookingList.isEmpty()) {
+//			return null;
+//		}
+//		
+//		return bookingList.get(bookingList.size() - 1);
+		
+		return bookingList.isEmpty() ? null : bookingList.get(bookingList.size() - 1);
 	}
 }
