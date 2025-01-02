@@ -20,22 +20,32 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@Builder
 @Getter
-@Table(name = "company")
+@Table(name = "recruitment")
 @Entity
-public class CompanyEntity {
-	@Id // pk 식별자
+public class RecruitmentEntity {
+	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
+	@Column(name = "companyId")
+	private int companyId;
 	
-	private String business;
+	private String position;
 	
-	private String scale;
+	private String responsibilities;
 	
-	private int headcount;
+	private String qualification;
+	
+	private String type;
+	
+	private String region;
+	
+	private int salary;
+	
+	private String deadline;
 	
 	@CreationTimestamp
 	@Column(name = "createdAt")
