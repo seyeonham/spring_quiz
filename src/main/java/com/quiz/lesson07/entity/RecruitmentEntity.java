@@ -1,5 +1,6 @@
 package com.quiz.lesson07.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -45,7 +46,7 @@ public class RecruitmentEntity {
 	
 	private int salary;
 	
-	private String deadline;
+	private LocalDate deadline;
 	
 	@CreationTimestamp
 	@Column(name = "createdAt")

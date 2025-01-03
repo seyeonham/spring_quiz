@@ -20,8 +20,8 @@ public class Lesson07Quiz02RestController {
 	
 	// 1) id로 조회
 	@GetMapping("/1")
-	public List<RecruitmentEntity> select1() {
-		return recruitmentRepository.findById(8);
+	public RecruitmentEntity select1() {
+		return recruitmentRepository.findById(8).orElse(null);
 	}
 	
 	// 2) parameter 조건 조회
@@ -55,6 +55,16 @@ public class Lesson07Quiz02RestController {
 		return recruitmentRepository.findByRegionAndSalaryBetween("성남시 분당구", 7000, 8500);
 	}
 	
+	// 7) solution1 - JPQL
+//	@GetMapping("/7")
+//	public List<RecruitmentEntity> select7() {
+//		return recruitmentRepository
+//				.findByTypeAndDeadlineAfterAndSalaryGreaterThanEqualOrderBySalaryDesc("정규직", "2026-04-10", 8100);
+//	}
 	
-	
+	// 7) solution2 - Native Query
+	@GetMapping("/7")
+	public List<RecruitmentEntity> select7() {
+		return recruitmentRepository.findByDeadlineAndType("정규직", "2026-04-10", 8100);
+	}
 }
